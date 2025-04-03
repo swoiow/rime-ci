@@ -42,7 +42,7 @@ jobs:
         export DYLD_LIBRARY_PATH=$GITHUB_WORKSPACE/rime_bin/dist/lib
         export PATH=$GITHUB_WORKSPACE/rime_bin/dist/bin:$PATH
         cd dist
-        rime_deployer --compile luna_pinyin_packs.schema.yaml
+        rime_deployer --compile thuocl_chengyu.dict.yaml
 
     - name: Upload compiled binary
       uses: actions/upload-artifact@v4
