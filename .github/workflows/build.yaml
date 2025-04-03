@@ -24,7 +24,9 @@ jobs:
       run: pip install requests
 
     - name: Build extension pack (dicts + schema + zip)
-      run: python build.py
+      run: |
+        python build.py
+        ls dist
 
     - name: Download rime_deployer tar.bz2
       run: curl -L -o rime.tar.bz2 https://github.com/rime/librime/releases/download/1.13.1/rime-1c23358-macOS-universal.tar.bz2
@@ -38,8 +40,9 @@ jobs:
     - name: Run rime_deployer --compile
       run: |
         export DYLD_LIBRARY_PATH=$GITHUB_WORKSPACE/rime_bin/dist/lib
+        export PATH=$GITHUB_WORKSPACE/rime_bin/dist/lib:$PATH
         cd dist
-        ../rime_bin/dist/bin/rime_deployer --compile luna_pinyin_packs.schema.yaml
+        rime_deployer --compile luna_pinyin_packs.schema.yaml
 
     - name: Upload compiled binary
       uses: actions/upload-artifact@v4
