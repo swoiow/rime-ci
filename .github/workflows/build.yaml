@@ -33,12 +33,12 @@ jobs:
       run: |
         mkdir rime_bin
         tar -xjf rime.tar.bz2 -C rime_bin
-        ls rime_bin/rime-1c23358-macOS-universal/dist/bin/
+        ls rime_bin/dist/bin/
 
     - name: Run rime_deployer --compile
       run: |
         cd dist
-        ../../rime_bin/rime-1c23358-macOS-universal/dist/bin/rime_deployer --compile luna_pinyin_packs.schema.yaml
+        ../../rime_bin/dist/bin/rime_deployer --compile luna_pinyin_packs.schema.yaml
 
     - name: Upload compiled binary
       uses: actions/upload-artifact@v4
