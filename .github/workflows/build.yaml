@@ -29,16 +29,16 @@ jobs:
     - name: Download rime_deployer tar.bz2
       run: curl -L -o rime.tar.bz2 https://github.com/rime/librime/releases/download/1.13.1/rime-1c23358-macOS-universal.tar.bz2
 
-    - name: Extract rime tools
+    - name: Extract rime tools to rime_bin/
       run: |
         mkdir rime_bin
-        tar -xjf rime.tar.bz2 -C rime_bin
-        find rime_bin -name rime_deployer
+        tar -xjf rime.tar.bz2 -C rime_bin --strip-components=1
+        ls rime_bin/dist/bin/
 
     - name: Run rime_deployer --compile
       run: |
         cd dist
-        ../rime_bin/bin/rime_deployer --compile luna_pinyin_packs.schema.yaml
+        ../rime_bin/dist/bin/rime_deployer --compile luna_pinyin_packs.schema.yaml
 
     - name: Upload compiled binary
       uses: actions/upload-artifact@v4
