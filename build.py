@@ -2,6 +2,7 @@ from pathlib import Path
 from datetime import date
 import requests
 import zipfile
+import pypinyin
 
 URL = "https://raw.githubusercontent.com/thunlp/THUOCL/master/data/THUOCL_chengyu.txt"
 OUT_DIR = Path("dist")
@@ -51,7 +52,7 @@ use_preset_vocabulary: false
 ...\n
 """)
         for word in sorted(set(entries)):
-            f.write(f"{word}\t100\n")
+            f.write(f"{word}\t{pypinyin.lazy_pinyin(word)}\t100\n")
 
 def create_zip(files: list[Path], zip_path: Path):
     with zipfile.ZipFile(zip_path, "w") as zf:
