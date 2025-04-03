@@ -40,7 +40,7 @@ jobs:
     - name: Run rime_deployer --compile
       run: |
         export DYLD_LIBRARY_PATH=$GITHUB_WORKSPACE/rime_bin/dist/lib
-        export PATH=$GITHUB_WORKSPACE/rime_bin/dist/lib:$PATH
+        export PATH=$GITHUB_WORKSPACE/rime_bin/dist/bin:$PATH
         cd dist
         rime_deployer --compile luna_pinyin_packs.schema.yaml
 
