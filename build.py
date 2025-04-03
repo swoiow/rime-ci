@@ -21,8 +21,6 @@ name: luna_pinyin_packs
 version: "1.0"
 sort: original
 use_preset_vocabulary: false
-import_tables:
-  - luna_pinyin
 ...
 """
     path.write_text(content, encoding="utf-8")
