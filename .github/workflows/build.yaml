@@ -13,12 +13,12 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Setup Python
-      uses: actions/setup-python@v4
+      uses: actions/setup-python@v5
       with:
-        python-version: "3.11"
+        python-version: "3.12"
 
     - name: Install dependencies
       run: pip install requests
@@ -41,19 +41,19 @@ jobs:
         ../rime_bin/bin/rime_deployer --compile luna_pinyin_packs.schema.yaml
 
     - name: Upload compiled binary
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: rime-bin-thuocl-chengyu
         path: dist/*.bin
 
     - name: Upload extension source zip
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: rime-extension-chengyu-zip
         path: rime_extension_chengyu.zip
 
     - name: Upload YAML source
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: rime-extension-chengyu-yamls
         path: |
