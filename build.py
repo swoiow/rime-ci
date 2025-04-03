@@ -58,6 +58,7 @@ use_preset_vocabulary: false
 ...\n
 """)
         for word in sorted(set(entries)):
+            word = word.strip()
             f.write(f"{word}\t{pypinyin.lazy_pinyin(word)}\t100\n")
 
 
