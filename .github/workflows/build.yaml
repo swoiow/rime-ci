@@ -1,0 +1,62 @@
+name: Build Rime Chengyu Extension Pack with Deploy
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'build.py'
+      - '.github/workflows/**'
+
+jobs:
+  build:
+    runs-on: macos-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Setup Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+
+    - name: Install dependencies
+      run: pip install requests
+
+    - name: Build extension pack (dicts + schema + zip)
+      run: python build.py
+
+    - name: Download rime_deployer tar.bz2
+      run: curl -L -o rime.tar.bz2 https://github.com/rime/librime/releases/download/1.13.1/rime-1c23358-macOS-universal.tar.bz2
+
+    - name: Extract rime tools
+      run: |
+        mkdir rime_bin
+        tar -xjf rime.tar.bz2 -C rime_bin
+        find rime_bin -name rime_deployer
+
+    - name: Run rime_deployer --compile
+      run: |
+        cd dist
+        ../rime_bin/bin/rime_deployer --compile luna_pinyin_packs.schema.yaml
+
+    - name: Upload compiled binary
+      uses: actions/upload-artifact@v3
+      with:
+        name: rime-bin-thuocl-chengyu
+        path: dist/*.bin
+
+    - name: Upload extension source zip
+      uses: actions/upload-artifact@v3
+      with:
+        name: rime-extension-chengyu-zip
+        path: rime_extension_chengyu.zip
+
+    - name: Upload YAML source
+      uses: actions/upload-artifact@v3
+      with:
+        name: rime-extension-chengyu-yamls
+        path: |
+          dist/thuocl_chengyu.dict.yaml
+          dist/luna_pinyin_packs.dict.yaml
+          dist/luna_pinyin_packs.schema.yaml
