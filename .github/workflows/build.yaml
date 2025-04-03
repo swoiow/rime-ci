@@ -38,7 +38,7 @@ jobs:
     - name: Run rime_deployer --compile
       run: |
         cd dist
-        ../../rime_bin/dist/bin/rime_deployer --compile luna_pinyin_packs.schema.yaml
+        ../rime_bin/dist/bin/rime_deployer --compile luna_pinyin_packs.schema.yaml
 
     - name: Upload compiled binary
       uses: actions/upload-artifact@v4
