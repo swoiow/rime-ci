@@ -1,4 +1,4 @@
-name: Build Rime Chengyu Extension Pack with Deploy
+name: Build Rime THUOCL Extension Pack with Deploy
 
 on:
   workflow_dispatch:
