@@ -48,7 +48,7 @@ jobs:
     - name: Upload files
       uses: actions/upload-artifact@v4
       with:
-        name: files
+        name: thuocl
         path: dist/*
 
     # - name: Upload extension source zip
