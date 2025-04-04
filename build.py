@@ -63,7 +63,7 @@ use_preset_vocabulary: false
 """)
         for word, freq in entries:
             pinyin = " ".join(lazy_pinyin(word))
-            f.write(f"{word}\t{pinyin}\t100\n")
+            f.write(f"{word}\t{pinyin}\t50\n")
 
 
 def write_main_schema_and_dict():
